@@ -25,6 +25,7 @@ app.use('/usuarios', usuarios);
 app.use('/produtos', produtos);
 app.use('/empresas', empresas);
 
+// configura rota para tratamento do erro 404. TEM QUE SER A ÚLTIMA ROTA A SER DEFINIDA!
 app.use(function (req, res, next) {
 	res.render('template-erro404.jade', { titulo: "Página não encontrada " });
 });
