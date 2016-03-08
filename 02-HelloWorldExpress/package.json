@@ -1,0 +1,14 @@
+{
+  "name": "helloworldexpress",
+  "version": "1.0.0",
+  "description": "Primeira aplicação em Node.js utilizando Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./"
+  },
+  "author": "Dimas Soares",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

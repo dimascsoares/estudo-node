@@ -1,0 +1,27 @@
+extends template-layout
+
+block content
+  h2
+    u= titulo
+  p
+   | Confira a lista de empresas ativas
+   
+   table(id='hor-minimalist-b')
+    thead
+     tr
+      th(scope='col') Empresa
+      th(scope='col') Ativo
+      th(scope='col') Site
+    each val in empresas
+     tbody
+      tr
+       td= val.Nome
+       td
+        if (val.Ativo === "Sim")
+          img(src='/images/ok.png')
+        else
+          img(src='/images/cancel.png')
+       td
+        if (val.Ativo === "Sim")
+          a(href=val.URL, target='_blank')
+            img(src='/images/internet.png')

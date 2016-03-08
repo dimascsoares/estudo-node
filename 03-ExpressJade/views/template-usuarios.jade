@@ -1,0 +1,24 @@
+extends template-layout
+
+block content
+  h2
+    u= titulo
+  p
+   | Tenha em mente que este exemplo está sendo executado no 
+   a(href="https://console.ng.bluemix.net/") IBM Bluemix
+   | , a plataforma de cloud computing da IBM.
+   
+   table(id='hor-minimalist-b')
+    thead
+     tr
+      th(scope='col') Nome
+      th(scope='col') Sobrenome
+      th(scope='col') E-mail
+    each val in usuarios
+     tbody
+      tr
+       td= val.Nome
+       td= val.Sobrenome
+       td= val.Email
+  
+  
