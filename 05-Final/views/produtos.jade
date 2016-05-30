@@ -1,0 +1,24 @@
+extends ./base/layout
+
+block content
+  h2
+    u= titulo
+  p
+   | Confira a nossa lista de produtos
+   
+   table(id='hor-minimalist-b')
+    thead
+     tr
+      th(scope='col') Marca
+      th(scope='col') Nome
+      th(scope='col') Categoria
+      th(scope='col') Estoque
+      th(scope='col') Preço
+    each val in produtos
+     tbody
+      tr
+       td= val.Marca
+       td= val.Nome
+       td= val.Categoria
+       td= val.Estoque
+       td= val.Preco

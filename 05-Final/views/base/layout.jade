@@ -1,0 +1,52 @@
+doctype html
+html
+ head
+  title= "Estudo Node.js - " + titulo
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  link(href="./css/simple-sidebar.css", rel="stylesheet")
+  link(href="./vendor/bootstrap-3.3.6/css/bootstrap.css", rel="stylesheet")
+  script(src="./vendor/jquery-1.12.3/js/jquery.js")
+  script(src="./vendor/bootstrap-3.3.6/js/bootstrap.js")
+  script(src="./vendor/jquery-1.12.3/js/jquery.form.js")
+  script(src="./vendor/jquery-1.12.3/js/jquery.mask.js")
+  script(src="./vendor/modulejs/js/modulejs.js")
+  script(src="./js/views/Usuarios/index.js")
+  script(src="./js/views/Home/index.js")
+  script(src="./js/controllers/usuarios_controller.js")
+  script(src="./js/controllers/home_controller.js")
+  script(src="./js/ajax.js")
+  script(src="./js/pubsub.js")
+  script(src="./js/router.js")
+  script(src="./js/util.js")
+  script(src="./js/app.js")
+  style(type="text/css").
+   .navbarGradient {
+    background: LightGray; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(LightGray, GhostWhite); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(LightGray, GhostWhite); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(LightGray, GhostWhite); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(LightGray, GhostWhite); /* Standard syntax */
+    margin-bottom: 0px;
+   }
+ body
+  div(style="margin-bottom: 120px;")
+   nav(class="navbar navbar-default navbar-fixed-top navbarGradient", style="height: 120px")
+    div(class="navbar-header")
+     div(class="navbar-brand")
+      a(href="#")
+       img(alt="Estudo Node.js", src="./img/logo.png")
+  div(id="wrapper")
+   div(id="sidebar-wrapper")
+    ul(class="sidebar-nav")
+     li(class="sidebar-brand")
+      span="IBM - ESTUDO NODE.JS"
+     li
+      a(href="/Usuarios") Usuários
+     li
+      a(href="/Empresas") Empresas
+     li
+      a(href="/Produtos") Produtos
+  div(style="margin: 0px 0px 0px 250px; padding-top: 10px;")
+   div(style="margin: 0px 40px 0px 40px")
+    block content
+  img(id="imgLoading", src="./img/loading.gif", style="z-index: 1100")

@@ -1,0 +1,16 @@
+extends ./base/layout
+
+block content
+  h2
+    u= titulo
+  br
+  p
+   | Bem vindo ao exemplo de Node.js utilizando Express e Jade.
+   | Clique nos links abaixo para navegar pelas páginas deste exemplo.
+  ul
+    li
+      a(href="./usuarios") Usuarios
+    li
+      a(href="./produtos") Produtos
+    li
+      a(href="./empresas") Empresas
