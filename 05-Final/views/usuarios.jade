@@ -20,25 +20,27 @@ block content
 
         div(id="alertaGeral")
         div(style="display: flex")
-          div(style="overflow-y: auto; height: 410px; width: 580px; margin-top:10px;")
+          div(id="divScroll", style="overflow-y: auto; height: 410px; width: 580px; margin-top:10px;")
             #lista_usuarios
               include ./usuarios/lista-usuarios
           div(id="divCadastroUsuario", style="flex-grow: 1; margin-left: 20px; white-space: nowrap")
             div(class="page-header" style="margin-top:0px; margin-bottom:25px")
               h3(style="margin-bottom:0px") Dados do usuário
-            div(class="form-group", style="margin-bottom: 25px")
-              label(for="txtNome") Nome:
-              input(type="text", id="txtNome", class="form-control", disabled="disabled")
-            div(class="form-group", style="margin-bottom: 25px")
-              label(for="txtSobrenome") Sobremome:
-              input(type="text", id="txtSobrenome", class="form-control", disabled="disabled")
-            div(class="form-group", style="margin-bottom: 25px")
-              label(for="txtEmail") E-mail:
-              input(type="text", id="txtEmail", class="form-control", disabled="disabled")
-            div(class="form-group", style="margin-bottom: 25px")
-              label(for="txtTelefone") Telefone:
-              input(type="text", id="txtTelefone", class="form-control sp_celphones", style="width: 140px", disabled="disabled")
             div(id="alertaAcoesUsuario")
+            form(id="formUsuario", method="post", action="/Usuarios/salvarUsuario")
+              input(type="hidden", id="txtId", name="id")
+              div(class="form-group", style="margin-bottom: 25px")
+                label(for="txtNome") Nome:
+                input(type="text", id="txtNome", name="nome", class="form-control", disabled="disabled")
+              div(class="form-group", style="margin-bottom: 25px")
+                label(for="txtSobrenome") Sobremome:
+                input(type="text", id="txtSobrenome", name="sobrenome", class="form-control", disabled="disabled")
+              div(class="form-group", style="margin-bottom: 25px")
+                label(for="txtEmail") E-mail:
+                input(type="text", id="txtEmail", name="email", class="form-control", disabled="disabled")
+              div(class="form-group", style="margin-bottom: 25px")
+                label(for="txtTelefone") Telefone:
+                input(type="text", id="txtTelefone", name="telefone", class="form-control sp_celphones", style="width: 140px", disabled="disabled")
             div(style="width: 100%; text-align: right")
               button(type="button", id="btnNovoUsuario", class="btn btn-default", style="margin-right: 15px")
                 span(class="glyphicon glyphicon-user") &nbsp;

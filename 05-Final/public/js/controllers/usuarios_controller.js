@@ -13,13 +13,14 @@
         this.view.btnCancelarEditarUsuario.click(this.btnCancelarEditarUsuarioClick.bind(this));
         
         this.view.btnEditarUsuario.click(this.btnEditarUsuarioClick.bind(this));
+        
+        this.view.btnSalvarUsuario.click(this.salvarUsuario.bind(this));
 
         //Carrega dados iniciais da lista de usuários
         this.carregarUsuarios();
     };
 
     UsuariosController.fn.listItemClick = function (e) {
-        var base = this;
         var alertWarning = 2;
         var divAlerta = this.view.divAlertaGeral;
         
@@ -27,20 +28,18 @@
         this.view.listaUsuarios.children('.list-group').children('.active').prop('class', 'list-group-item');
         e.currentTarget.className = 'list-group-item active';
         
-        //Busca dados do usuário clicado na lista
-        this.processaRequisicaoAJAX('/Usuarios/obterUsuario/' + e.currentTarget.id, 'json', 'Erro ao carregar dados do usuário', divAlerta, "alertaGeral", function(data) {
-            if (!jQuery.isEmptyObject(data)){
-                base.configuraEdicaoUsuario('disabled', true);
-                base.view.btnEditarUsuario.show();
-                base.view.btnExcluirUsuario.show();
-                base.view.txtNome.val(data.Nome);
-                base.view.txtEmail.val(data.Email);
-                base.view.txtTelefone.val(data.Telefone);
-                base.view.txtSobrenome.val(data.Sobrenome);
-            }
-            else
-                base.util.showAlert(divAlerta, "alertaGeral", alertWarning, undefined, "Usuário não encontrado");
-        });
+        var dadosUsuario = this.obterJSONUsuario(e.currentTarget.id);
+        if (!jQuery.isEmptyObject(dadosUsuario))
+            this.carregaDadosUsuarioSelecionado(dadosUsuario);
+        else
+            this.util.showAlert(divAlerta, "alertaGeral", alertWarning, undefined, "Usuário não encontrado");
+    };
+
+    UsuariosController.fn.obterJSONUsuario = function (idUsuario) {
+        var hidden = $("#hidden" + idUsuario);
+        if (hidden == undefined)
+            return {};
+        return JSON.parse(hidden.val());
     };
 
     UsuariosController.fn.carregarUsuarios = function (e) {
@@ -49,6 +48,61 @@
             base.view.listaUsuarios.html(data);
         });
     };
+
+    UsuariosController.fn.salvarUsuario = function (e) {
+        var base = this;
+        var alertWarning = 2;
+        var divAlerta = this.view.alertaAcoesUsuario;
+        
+        //Valida se o nome está preenchido
+        if (this.view.txtNome.val() == ''){
+            base.util.showAlert(divAlerta, "alertaAcoesUsuario", alertWarning, undefined, "Nome do usuário é obrigatório");
+            return;
+        }
+        //Valida se o e-mail está preenchido
+        if (this.view.txtEmail.val() == ''){
+            base.util.showAlert(divAlerta, "alertaAcoesUsuario", alertWarning, undefined, "E-mail do usuário é obrigatório");
+            return;
+        }
+        
+        //Configura o POST do formulário
+        this.postFormAJAX(this.view.formUsuario, '/Usuarios/salvarUsuario', 'Erro ao salvar o usuário', divAlerta, "alertaAcoesUsuario", function(data) {
+            //Se retornou dados do usuário salvo, significa que o usuário foi salvo com sucesso
+            if (data.usuarioSalvo != undefined){
+                //Carrega os dados do usuário salvo no form
+                base.carregaDadosUsuarioSelecionado(data.usuarioSalvo);
+                //Exibe a lista de usuários atualizada com o novo usuário
+                base.view.listaUsuarios.html(data.listaUsuariosAtualizada);
+                //Marca o usuário como selecionado na lista
+                $("#" + data.usuarioSalvo.Id).prop('class', 'list-group-item active');
+                //Move o scroll para o novo usuário na lista
+                base.view.divScroll.animate({
+                    scrollTop: $("#" + data.usuarioSalvo.Id).offset().top
+                }, 500);
+                //Anima o novo item na lista para chamar a atenção
+                base.util.blinkControl($("#" + data.usuarioSalvo.Id));
+            }
+            //Exibe mensagens de erro
+            else if (data.Erro != undefined)
+                base.util.showAlert(divAlerta, "alertaAcoesUsuario", alertWarning, undefined, data.Erro);
+            else
+                base.util.showAlert(divAlerta, "alertaAcoesUsuario", alertWarning, undefined, "Ocorreu um erro desconhecido");
+        });
+        
+        //Dispara o submit do formulário
+        this.view.formUsuario.submit();
+    };
+
+    UsuariosController.fn.carregaDadosUsuarioSelecionado = function (usuarioSelecionado) {
+        this.configuraEdicaoUsuario('disabled', true);
+        this.view.btnEditarUsuario.show();
+        this.view.btnExcluirUsuario.show();
+        this.view.txtId.val(usuarioSelecionado.Id);
+        this.view.txtNome.val(usuarioSelecionado.Nome);
+        this.view.txtEmail.val(usuarioSelecionado.Email);
+        this.view.txtTelefone.val(usuarioSelecionado.Telefone);
+        this.view.txtSobrenome.val(usuarioSelecionado.Sobrenome);
+    }
 
     UsuariosController.fn.processaRequisicaoAJAX = function (url, dataType, tituloErro, divAlerta, idAlerta, callbackSucesso) {
         var base = this;
@@ -63,6 +117,24 @@
             type: 'GET',
             url: url,
             dataType: dataType,
+            success: function (data) {
+                callbackSucesso(data);
+                base.view.imgLoading.fadeOut(250);
+            },
+            error: function (xhr, status, error) {
+                base.util.showAlert(divAlerta, idAlerta, alertDanger, tituloErro, "Ocorreu um erro inesperado (" + xhr.status + " - " + xhr.statusText + ")");
+                base.view.imgLoading.fadeOut(250);
+            }
+        });
+    }
+
+    UsuariosController.fn.postFormAJAX = function (form, url, tituloErro, divAlerta, idAlerta, callbackSucesso) {
+        var base = this;
+        var alertDanger = 3;
+
+        //Realiza post do form via AJAX
+        form.ajaxForm({
+            url: url,
             success: function (data) {
                 callbackSucesso(data);
                 base.view.imgLoading.fadeOut(250);
@@ -101,6 +173,7 @@
         this.view.txtTelefone.prop('disabled', statusText);
         this.view.txtSobrenome.prop('disabled', statusText);
         if (limpaTextos){
+            this.view.txtId.val('');
             this.view.txtNome.val('');
             this.view.txtEmail.val('');
             this.view.txtTelefone.val('');

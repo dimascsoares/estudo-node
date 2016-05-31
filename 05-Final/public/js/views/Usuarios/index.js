@@ -5,11 +5,15 @@
         this.imgLoading = this.baseView.imgLoading;
         this.listaUsuarios = $('#lista_usuarios');
         this.divAlertaGeral = $("#alertaGeral");
+        this.divScroll = $("#divScroll");
+        this.alertaAcoesUsuario = $("#alertaAcoesUsuario");
         
+        this.txtId = $("#txtId");
         this.txtNome = $("#txtNome");
         this.txtEmail = $("#txtEmail");
         this.txtTelefone = $("#txtTelefone");
         this.txtSobrenome = $("#txtSobrenome");
+        this.formUsuario = $("#formUsuario");
         
         this.btnNovoUsuario = $("#btnNovoUsuario");
         this.btnEditarUsuario = $("#btnEditarUsuario");

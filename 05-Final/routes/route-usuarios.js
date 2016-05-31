@@ -1,5 +1,6 @@
 var express = require('express');
-var router = express.Router();
+var qs      = require('querystring');
+var router  = express.Router();
 
 var dadosUsuarios = 
     { 
@@ -62,5 +63,37 @@ router.get('/obterUsuario/:id', function (req, res, next) {
     res.json({});
     return;
 });
+
+router.post('/salvarUsuario/', function (req, res) {
+    var body = '';
+    req.on('data', function(data){
+        body += data;
+    });
+    req.on('end', function(){
+        var post = qs.parse(body);
+        var usuario = 
+        {
+            Id : ((post.id != '') ? post.id : obterGUID()),
+            Nome : post.nome,
+            Sobrenome : post.sobrenome,
+            Email : post.email,
+            Telefone : post.telefone,
+            Empresas : []
+        };
+        dadosUsuarios.usuarios.push(usuario);
+        
+        res.render('usuarios/lista-usuarios', dadosUsuarios, function (err, html) {
+            var response = { usuarioSalvo : usuario, listaUsuariosAtualizada : html };
+            res.send(response);
+        });
+    });
+});
+
+function obterGUID(){
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+}
 
 module.exports = router;
