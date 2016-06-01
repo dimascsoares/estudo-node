@@ -53,22 +53,25 @@
         var base = this;
         var alertWarning = 2;
         var divAlerta = this.view.alertaAcoesUsuario;
+        var idAlerta = "alertaUsuario";
+        
+        this.util.hideAlert(idAlerta);
         
         //Valida se o nome está preenchido
         if (this.view.txtNome.val() == ''){
-            base.util.showAlert(divAlerta, "alertaAcoesUsuario", alertWarning, undefined, "Nome do usuário é obrigatório");
+            base.util.showAlert(divAlerta, idAlerta, alertWarning, undefined, "Nome do usuário é obrigatório");
             return;
         }
         //Valida se o e-mail está preenchido
         if (this.view.txtEmail.val() == ''){
-            base.util.showAlert(divAlerta, "alertaAcoesUsuario", alertWarning, undefined, "E-mail do usuário é obrigatório");
+            base.util.showAlert(divAlerta, idAlerta, alertWarning, undefined, "E-mail do usuário é obrigatório");
             return;
         }
         
         //Configura o POST do formulário
-        this.postFormAJAX(this.view.formUsuario, '/Usuarios/salvarUsuario', 'Erro ao salvar o usuário', divAlerta, "alertaAcoesUsuario", function(data) {
+        this.postFormAJAX(this.view.formUsuario, '/Usuarios/salvarUsuario', 'Erro ao salvar o usuário', divAlerta, idAlerta, function(data) {
             //Se retornou dados do usuário salvo, significa que o usuário foi salvo com sucesso
-            if (data.usuarioSalvo != undefined){
+            if (typeof data.usuarioSalvo !== 'undefined'){
                 //Carrega os dados do usuário salvo no form
                 base.carregaDadosUsuarioSelecionado(data.usuarioSalvo);
                 //Exibe a lista de usuários atualizada com o novo usuário
@@ -83,10 +86,10 @@
                 base.util.blinkControl($("#" + data.usuarioSalvo.Id));
             }
             //Exibe mensagens de erro
-            else if (data.Erro != undefined)
-                base.util.showAlert(divAlerta, "alertaAcoesUsuario", alertWarning, undefined, data.Erro);
+            else if (typeof data.Erro !== 'undefined')
+                base.util.showAlert(divAlerta, idAlerta, alertWarning, undefined, data.Erro);
             else
-                base.util.showAlert(divAlerta, "alertaAcoesUsuario", alertWarning, undefined, "Ocorreu um erro desconhecido");
+                base.util.showAlert(divAlerta, idAlerta, alertWarning, undefined, "Ocorreu um erro desconhecido");
         });
         
         //Dispara o submit do formulário
@@ -131,6 +134,9 @@
     UsuariosController.fn.postFormAJAX = function (form, url, tituloErro, divAlerta, idAlerta, callbackSucesso) {
         var base = this;
         var alertDanger = 3;
+        
+        this.util.hideAlert(idAlerta);
+        this.view.imgLoading.fadeIn(100);
 
         //Realiza post do form via AJAX
         form.ajaxForm({
@@ -147,23 +153,27 @@
     }
 
     UsuariosController.fn.btnNovoUsuarioClick = function (e) {
+        this.util.hideAlert("alertaUsuario");
         this.configuraEdicaoUsuario('', true);
         this.inicializaEdicaoUsuario(this.view.btnCancelarNovoUsuario);
         this.view.listaUsuarios.children('.list-group').children('.active').prop('class', 'list-group-item');
     };
 
     UsuariosController.fn.btnEditarUsuarioClick = function (e) {
+        this.util.hideAlert("alertaUsuario");
         this.configuraEdicaoUsuario('', false);
         this.inicializaEdicaoUsuario(this.view.btnCancelarEditarUsuario);
     };
 
     UsuariosController.fn.btnCancelarEditarUsuarioClick = function (e) {
+        this.util.hideAlert("alertaUsuario");
         this.configuraEdicaoUsuario('disabled', false);
         this.view.btnEditarUsuario.show();
         this.view.btnExcluirUsuario.show();
     };
 
     UsuariosController.fn.btnCancelarNovoUsuarioClick = function (e) {
+        this.util.hideAlert("alertaUsuario");
         this.configuraEdicaoUsuario('disabled', true);
     };
 
