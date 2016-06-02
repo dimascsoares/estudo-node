@@ -29,6 +29,20 @@
     Util.fn.blinkControl = function (control) {
         control.fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
     };
+
+    Util.fn.exibirConfirmacao = function (titulo, mensagem, callbackConfirmacao) {
+        var modal = $("#modalConfirmacao");
+        var btnSim = $("#btnSimConfirmacao");
+        var lblTitulo = $("#lblTituloConfirmacao");
+        var lblMensagem = $("#lblMensagemConfirmacao");
+        
+        lblTitulo.prop('innerHTML', titulo);
+        lblMensagem.prop('innerHTML', mensagem);
+        btnSim.off();
+        btnSim.click(callbackConfirmacao.bind(this, modal));
+        
+        modal.modal();
+    };
     
     Util.fn.SPMaskBehavior = function (val) {
         return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';

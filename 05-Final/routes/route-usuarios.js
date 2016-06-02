@@ -141,13 +141,16 @@ router.post('/salvarUsuario/', function (req, res) {
 
 router.post('/excluirUsuario/', function (req, res) {
     processaPost(req, function (post) {
+        //Verifica se o ID do usuário a ser excluído foi informado
         if (isNullOrEmpty(post.id)){
             res.json({ Erro : "Usuário não encontrado" });
             return;
         }
         
+        //Percorre a lista de usuários
         for(var i = 0; i = dadosUsuarios.length; i++)
             if (dadosUsuarios[i].Id == post.id) {
+                //Remove o usuário da lista de usuários cadastrados
                 dadosUsuarios = dadosUsuarios.splice(i, 1);
                 break;
             }

@@ -49,4 +49,18 @@ html
   div(style="margin: 0px 0px 0px 250px; padding-top: 10px;")
    div(style="margin: 0px 40px 0px 40px")
     block content
+  div(id="modalConfirmacao", class="modal fade", role="dialog")
+   div(class="modal-dialog")
+    div(class="modal-content")
+     div(class="modal-header")
+      button(type="button", class="close", data-dismiss="modal") &times
+      h4(class="modal-title")
+       span(id="lblTituloConfirmacao")
+     div(class="modal-body")
+      div(class="panel panel-default")
+       div(class="panel-body")
+        span(id="lblMensagemConfirmacao")
+     div(class="modal-footer")
+      button(type="button", class="btn btn-default", data-dismiss="modal") Não
+      button(type="button", class="btn btn-default", id="btnSimConfirmacao") Sim
   img(id="imgLoading", src="./img/loading.gif", style="z-index: 1100")

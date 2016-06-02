@@ -15,6 +15,8 @@
         this.view.btnEditarUsuario.click(this.btnEditarUsuarioClick.bind(this));
         
         this.view.btnSalvarUsuario.click(this.salvarUsuario.bind(this));
+        
+        this.view.btnExcluirUsuario.click(this.excluirUsuario.bind(this));
 
         //Carrega dados iniciais da lista de usuários
         this.carregarUsuarios();
@@ -95,6 +97,13 @@
         //Dispara o submit do formulário
         this.view.formUsuario.submit();
     };
+
+    UsuariosController.fn.excluirUsuario = function (usuarioSelecionado) {
+        this.util.exibirConfirmacao('Exclusão de usuário', 'Tem certeza que deseja excluir o usuário?', function(modal){
+            alert('Excluiu');
+            modal.modal("hide");
+        });
+    }
 
     UsuariosController.fn.carregaDadosUsuarioSelecionado = function (usuarioSelecionado) {
         this.configuraEdicaoUsuario('disabled', true);
