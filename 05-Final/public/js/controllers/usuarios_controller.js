@@ -99,8 +99,34 @@
     };
 
     UsuariosController.fn.excluirUsuario = function (usuarioSelecionado) {
+        var base = this;
+        var alertWarning = 2;
+        var divAlerta = this.view.alertaAcoesUsuario;
+        var idAlerta = "alertaUsuario";
+        
+        this.util.hideAlert(idAlerta);
+        
         this.util.exibirConfirmacao('Exclusão de usuário', 'Tem certeza que deseja excluir o usuário?', function(modal){
-            alert('Excluiu');
+            //Configura o POST do formulário
+            console.log('respondeu sim ');
+            base.postFormAJAX(base.view.formUsuario, '/Usuarios/excluirUsuario', 'Erro ao excluir o usuário', divAlerta, idAlerta, function(data) {
+                //Se retornou dados do usuário salvo, significa que o usuário foi salvo com sucesso
+                console.log('executou post: ' + data);
+                if (data){
+                    //Exibe a lista de usuários atualizada sem o usuário excluído
+                    base.view.listaUsuarios.html(data);
+                    base.view.listaUsuarios.children('.list-group').children('.active').prop('class', 'list-group-item');
+                    base.configuraEdicaoUsuario('disabled', true);
+                }
+                //Exibe mensagens de erro
+                else if (typeof data.Erro !== 'undefined')
+                    base.util.showAlert(divAlerta, idAlerta, alertWarning, undefined, data.Erro);
+                else
+                    base.util.showAlert(divAlerta, idAlerta, alertWarning, undefined, "Ocorreu um erro desconhecido");
+            });
+            console.log('vai realizar submit do form');
+            //Dispara o submit do formulário
+            base.view.formUsuario.submit();
             modal.modal("hide");
         });
     }

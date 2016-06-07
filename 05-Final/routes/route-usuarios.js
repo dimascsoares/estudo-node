@@ -148,12 +148,14 @@ router.post('/excluirUsuario/', function (req, res) {
         }
         
         //Percorre a lista de usuários
-        for(var i = 0; i = dadosUsuarios.length; i++)
-            if (dadosUsuarios[i].Id == post.id) {
+        for(var i = 0; i < dadosUsuarios.usuarios.length; i++)
+        {
+            if (dadosUsuarios.usuarios[i].Id == post.id) {
                 //Remove o usuário da lista de usuários cadastrados
-                dadosUsuarios = dadosUsuarios.splice(i, 1);
+                dadosUsuarios.usuarios.splice(i, 1);
                 break;
             }
+        }
         
         //Renderiza a lista de usuários cadastrados
         res.render('usuarios/lista-usuarios', dadosUsuarios);
