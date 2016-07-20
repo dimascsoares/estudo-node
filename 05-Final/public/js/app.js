@@ -1,7 +1,7 @@
 ﻿Module("Estudo.NodeJs.App", function (App) {
     App.fn.initialize = function () {
-        //Module("Estudo.eden", new Estudo.Eden());
-        Module("Estudo.ajax", new Estudo.Ajax());
+        Module("Estudo.eden", new Estudo.NodeJs.Eden());
+        Module("Estudo.ajax", new Estudo.NodeJs.Ajax());
         Module("Estudo.mediator", new Estudo.Pubsub());
     };
 

@@ -1,4 +1,4 @@
-﻿Module("Estudo.Ajax", function (Ajax) {
+﻿Module("Estudo.NodeJs.Ajax", function (Ajax) {
     Ajax.fn.initialize = function (url, options) { };
 
     Ajax.fn.request = function (url, options) {

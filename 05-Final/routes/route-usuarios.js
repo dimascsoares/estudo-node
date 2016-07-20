@@ -73,22 +73,22 @@ router.get('/obterUsuario/:id', function (req, res, next) {
 router.post('/salvarUsuario/', function (req, res) {
     processaPost(req, function (post) {
         //Valida se o nome está preenchido
-        if (isNullOrEmpty(post.nome)){
+        if (isNullOrEmpty(post.Nome)){
             res.json({ Erro : "Nome do usuário é obrigatório" });
             return;
         }
         //Valida se o e-mail está preenchido
-        if (isNullOrEmpty(post.email)){
+        if (isNullOrEmpty(post.Email)){
             res.json({ Erro : "E-mail do usuário é obrigatório" });
             return;
         }
         
         //Verifica se é uma edição ou se está salvando um novo usuário
-        var isEdicao = (!isNullOrEmpty(post.id));
+        var isEdicao = (!isNullOrEmpty(post.Id));
         //Percorre a lista de usuários cadastrados
         for(var usuario of dadosUsuarios.usuarios) {
             //Verifica se o usuário cadastrado é o mesmo usuário em edição
-            var isMesmoUsuario = ((post.email == usuario.Email) || ((post.nome == usuario.Nome) && (post.sobrenome == usuario.Sobrenome)));
+            var isMesmoUsuario = ((post.Email == usuario.Email) || ((post.Nome == usuario.Nome) && (post.Sobrenome == usuario.Sobrenome)));
             
             //Se estiver criando um novo usuário e o usuário digitado já existir, exibe um erro
             if ((!isEdicao) && isMesmoUsuario){
@@ -97,7 +97,7 @@ router.post('/salvarUsuario/', function (req, res) {
             }
             //Se estiver editando, e o usuário estiver tentando editar os dados informando 
             //dados de outro usuário existente, exibe um erro
-            if (isEdicao && isMesmoUsuario && (post.id !== usuario.Id)){
+            if (isEdicao && isMesmoUsuario && (post.Id !== usuario.Id)){
                 res.json({ Erro : "Não é permitido alterar o nome do usuário para outro já existente" });
                 return;
             }
@@ -106,11 +106,11 @@ router.post('/salvarUsuario/', function (req, res) {
         //Cria objeto do usuário a ser salvo
         var usuario = 
         {
-            Id : ((post.id != '') ? post.id : obterGUID()),
-            Nome : post.nome,
-            Sobrenome : post.sobrenome,
-            Email : post.email,
-            Telefone : post.telefone,
+            Id : ((post.Id != '') ? post.Id : obterGUID()),
+            Nome : post.Nome,
+            Sobrenome : post.Sobrenome,
+            Email : post.Email,
+            Telefone : post.Telefone,
             Empresas : []
         };
         
@@ -120,11 +120,11 @@ router.post('/salvarUsuario/', function (req, res) {
         else {
             //Se for edição, modifica os dados do usuário existente
             for(var usuario of dadosUsuarios.usuarios) {
-                if (post.id == usuario.Id){
-                    usuario.Nome = post.nome;
-                    usuario.Sobrenome = post.sobrenome;
-                    usuario.Email = post.email;
-                    usuario.Telefone = post.telefone;
+                if (post.Id == usuario.Id){
+                    usuario.Nome = post.Nome;
+                    usuario.Sobrenome = post.Sobrenome;
+                    usuario.Email = post.Email;
+                    usuario.Telefone = post.Telefone;
                     break;
                 }
             }
@@ -142,7 +142,7 @@ router.post('/salvarUsuario/', function (req, res) {
 router.post('/excluirUsuario/', function (req, res) {
     processaPost(req, function (post) {
         //Verifica se o ID do usuário a ser excluído foi informado
-        if (isNullOrEmpty(post.id)){
+        if (isNullOrEmpty(post.Id)){
             res.json({ Erro : "Usuário não encontrado" });
             return;
         }
@@ -150,7 +150,7 @@ router.post('/excluirUsuario/', function (req, res) {
         //Percorre a lista de usuários
         for(var i = 0; i < dadosUsuarios.usuarios.length; i++)
         {
-            if (dadosUsuarios.usuarios[i].Id == post.id) {
+            if (dadosUsuarios.usuarios[i].Id == post.Id) {
                 //Remove o usuário da lista de usuários cadastrados
                 dadosUsuarios.usuarios.splice(i, 1);
                 break;

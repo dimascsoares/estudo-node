@@ -1,0 +1,9 @@
+#lista {
+    border: 0px none;
+}
+
+#listaSemResultado {
+    border: 1px solid lightgray;
+    font-style: italic;
+    content: "Nenhum usuário encontrado";
+}

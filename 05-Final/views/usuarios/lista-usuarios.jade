@@ -1,15 +1,16 @@
-div(class="list-group")
-  - if (typeof(usuarios) !== 'undefined'){
-    - for (var i = 0; i < usuarios.length; i++) {
-      input(type="hidden", id="hidden#{usuarios[i].Id}", value="#{JSON.stringify(usuarios[i])}")
-      a(id="#{usuarios[i].Id}", href="#", class="list-group-item")
-        h4(class="list-group-item-heading")
-          =usuarios[i].Nome + " " + usuarios[i].Sobrenome
-        p(class="list-group-item-text")
-          b E-mail: 
-          =usuarios[i].Email
-          br
-          b Empresas: 
-          |#{usuarios[i].Empresas.map(function(e){return e.Nome;}).join(', ')}
+div(class="lista")  
+  div(class="list-group")
+    - if (typeof(usuarios) !== 'undefined'){
+      - for (var i = 0; i < usuarios.length; i++) {
+        input(type="hidden", id="hidden#{usuarios[i].Id}", value="#{JSON.stringify(usuarios[i])}")
+        a(id="#{usuarios[i].Id}", href="#", class="list-group-item")
+          h4(class="list-group-item-heading")
+            =usuarios[i].Nome + " " + usuarios[i].Sobrenome
+          p(class="list-group-item-text")
+            b E-mail: 
+            =usuarios[i].Email
+            br
+            b Empresas: 
+            |#{usuarios[i].Empresas.map(function(e){return e.Nome;}).join(', ')}
+      - }
     - }
-  - }
