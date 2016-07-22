@@ -1,4 +1,4 @@
-Module("Estudo.NodeJs.Controllers.UsuariosService", function (UsuariosService) {
+Module("Estudo.NodeJs.Service.UsuariosService", function (UsuariosService) {
     UsuariosService.fn.initialize = function () { };
 
     UsuariosService.fn.obterListaUsuarios = function (e) {

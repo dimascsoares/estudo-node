@@ -1,4 +1,4 @@
-﻿Module("Estudo.NodeJs.Views.Usuarios.Index", function (Index) {
+﻿Module("Estudo.NodeJs.Views.Usuarios.Aba.Usuarios", function (Index) {
     Index.fn.initialize = function () {
         this.baseView = new Estudo.NodeJs.Views.Home.Index();
         

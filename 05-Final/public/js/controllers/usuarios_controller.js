@@ -1,9 +1,9 @@
 ﻿Module("Estudo.NodeJs.Controllers.UsuariosController", function (UsuariosController) {
     UsuariosController.fn.initialize = function () {
         this.util = new Estudo.NodeJs.Util();
-        this.view = new Estudo.NodeJs.Views.Usuarios.Index();
-        this.service = new Estudo.NodeJs.Controllers.UsuariosService();
-
+        this.view = new Estudo.NodeJs.Views.Usuarios.Aba.Usuarios();
+        this.service = new Estudo.NodeJs.Service.UsuariosService();
+        
         //Evento de click nos itens da lista de usuários
         this.view.listaUsuarios.on('click', '.list-group-item', this.listItemClick.bind(this))
         
