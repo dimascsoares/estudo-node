@@ -1,2 +1,2 @@
 # estudo-node
-Repositório para armazenar os fontes do meu estudo sobre Node.ja
+Repositório para armazenar os fontes do meu estudo sobre Node.js
