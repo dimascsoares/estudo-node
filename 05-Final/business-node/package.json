@@ -1,0 +1,16 @@
+{
+  "name": "estudonode",
+  "version": "1.0.0",
+  "description": "Estudo Node - Versão Final",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dimas Soares",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "querystring": "^0.2.0"
+  }
+}
