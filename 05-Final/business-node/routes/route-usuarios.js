@@ -1,5 +1,4 @@
 var express = require('express');
-var qs      = require('querystring');
 var router  = express.Router();
 
 var dadosUsuarios = 
@@ -160,7 +159,7 @@ function processaPost(req, callbackPost){
         body += data;
     });
     req.on('end', function(){
-        var post = qs.parse(body);
+        var post = JSON.parse(body);
         callbackPost(post);
     });
 }

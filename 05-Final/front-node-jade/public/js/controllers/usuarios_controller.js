@@ -52,7 +52,11 @@
         }.bind(this)).fail(function () { this.view.exibirListaSemResultados(); }.bind(this));
     };
 
-    UsuariosController.fn.salvarUsuario = function (e) {        
+    UsuariosController.fn.salvarUsuario = function (e) {     
+        var alertWarning = 2;
+        var divAlerta = this.view.alertaAcoesUsuario;
+        var idAlerta = "alertaUsuario";
+           
         //Valida se o nome está preenchido
         if (this.view.txtNome.val() == ''){
             this.util.showAlert(divAlerta, idAlerta, alertWarning, undefined, "Nome do usuário é obrigatório");

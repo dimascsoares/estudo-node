@@ -1,29 +1,33 @@
 var path = require('path');
 var http = require('http');
+var qs = require('querystring');
 var PropertiesReader = require('properties-reader');
 var properties = PropertiesReader(path.join(global.appRoot, '/config/properties.file'));
 
 var BaseController = {
     http: http,
     getOptions: getOptions,
-    executePost: function (req, path, callbackSucesso){
+    executePost: function (req, path, callbacks){
         processaPost(req, function (post) {
-            var options = getOptions(path, 'POST', 'application/x-www-form-urlencoded; charset=UTF-8', post);
+            var postData = JSON.stringify(post);
+            var options = getOptions(path, 'POST', 'application/json; charset=UTF-8', postData);
             var request = http.request(options, function(httpres) {
                 httpres.setEncoding('utf8');
                 httpres.on('data', function (dados) {
                     dadosUsuarios = JSON.parse(dados);
                 });
                 httpres.on('end', function () {
-                    if (dadosUsuarios.Erro)
-                        res.send(dadosUsuarios);
-                    else
-                        if (callbackSucesso)
-                            callbackSucesso(dadosUsuarios);
+                    if (callbacks)
+                    {
+                        if ((dadosUsuarios.Erro) && (callbacks.falha))
+                            callbacks.falha(dadosUsuarios);
+                        else if (callbacks.sucesso)
+                            callbacks.sucesso(dadosUsuarios);
+                    }
                 });
             });
 
-            request.write(post);
+            request.write(postData);
             request.end();
         });
     },
@@ -50,7 +54,8 @@ function processaPost(req, callbackPost){
             body += data;
         });
         req.on('end', function(){
-            callbackPost(body);
+            var post = qs.parse(body);
+            callbackPost(post);
         });
     };
 

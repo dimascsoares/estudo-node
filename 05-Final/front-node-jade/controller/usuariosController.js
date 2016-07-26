@@ -15,21 +15,29 @@ router.get('/obterListaUsuarios/', function (req, res, next) {
 
 router.post('/excluirUsuario/', function (req, res) {
     //executaAcao('/Usuarios/excluirUsuario', 'POST', res);
-    baseController.executePost(req, '/Usuarios/excluirUsuario', function (dadosUsuarios) {
-        //Renderiza a lista de usuários atualizada
-        res.render('usuarios/lista-usuarios', dadosUsuarios);
-    });
+    baseController.executePost(req, '/Usuarios/excluirUsuario', 
+        {
+            sucesso: function (dadosUsuarios) {
+                //Renderiza a lista de usuários atualizada
+                res.render('usuarios/lista-usuarios', dadosUsuarios);
+            },
+            falha: function (erro) { res.send(erro); }
+        });
 });
 
 router.post('/salvarUsuario/', function (req, res) {
-    baseController.executePost(req, '/Usuarios/salvarUsuario', function (dadosUsuarios) {
-        //Renderiza a lista de usuários atualizada
-        res.render('usuarios/lista-usuarios', dadosUsuarios.listaUsuariosAtualizada, function (err, html) {
-            //Monta a response informando os dados do usuário salvo e a lista atualizada
-            var response = { usuarioSalvo : dadosUsuarios.usuarioSalvo, listaUsuariosAtualizada : html };
-            res.send(response);
+    baseController.executePost(req, '/Usuarios/salvarUsuario', 
+        {
+            sucesso: function (dadosUsuarios) {
+                //Renderiza a lista de usuários atualizada
+                res.render('usuarios/lista-usuarios', dadosUsuarios.listaUsuariosAtualizada, function (err, html) {
+                    //Monta a response informando os dados do usuário salvo e a lista atualizada
+                    var response = { usuarioSalvo : dadosUsuarios.usuarioSalvo, listaUsuariosAtualizada : html };
+                    res.send(response);
+                });
+            },
+            falha: function (erro) { res.send(erro); }
         });
-    });
 });
 
 function executaAcao(path, method, res){
