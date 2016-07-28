@@ -11,14 +11,15 @@ e outros projetos com a camada de apresentação em diferentes tecnologias.
   - O estudo e os sistemas estão em fase inicial
   - A camada business está em desenvolvimento, não está finalizada
   - O projeto de camada de apresentação em Node.js + Jade está em desenvolvimento
+  - O projeto de camada de apresentação em Node.js + Angular está em fase embrionária
 
 ### Projetos atuais e instruções
   - BUSINESS-NODE: camada de negócios implementada em Node.js
   - FRONT-NODE-JADE: camada de apresentação impementeda em Node.js + Jade
+  - FRONT-NODE-ANGULAR2: camada de apresentação impementeda em Node.js + Angular2 + Typescript
 
 
 ### Intenção de implementações futuras
-  - Camada de apresentação em Angular
   - Camada de business em C#
   - Camada de apresentação com React
   - Camada de apresentação em Windows Forms C#
