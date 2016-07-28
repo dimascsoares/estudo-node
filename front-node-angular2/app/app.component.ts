@@ -1,57 +1,25 @@
 import { Component } from '@angular/core';
+import { Usuario } from './models/usuario';
+import { ListaUsuariosComponent } from './components/listaUsuarios/listaUsuarios.component';
 
 export class Hero {
   id: number;
   name: string;
 }
 
-export class Empresa {
-  Nome: string;
-}
-
-export class Usuario {
-  Id: string;
-  Nome: string;
-  Sobrenome: string;
-  Email: string;
-  Empresas: Empresa[];
-
-  constructor(id:string, nome:string, sobrenome:string, email:string, empresas:Empresa[]){
-    this.Id = id;
-    this.Nome = nome;
-    this.Sobrenome = sobrenome;
-    this.Email = email;
-    this.Empresas = empresas;
-  }
-
-  obterStringEmpresas() {
-    return this.Empresas.map(function(e){return e.Nome;}).join(', ');
-  }
-}
-
 @Component({
   selector: 'my-app',
   template:`
   <h1>{{title}}</h1>
-  <div class="list-group">
-    <div *ngFor="let usuario of usuarios">
-      <input type="hidden" id="hidden{{usuario.Id}}"  />
-      <a id="{{usuario.Id}}" href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">{{usuario.Nome + " " + usuario.Sobrenome}}</h4>
-        <p>
-          <b>E-mail:</b> {{usuario.Email}}<br />
-          <b>Empresas:</b> {{usuario.obterStringEmpresas()}}
-        </p>
-      </a>
-    </div>
-  </div>
+  <lista-Usuarios [usuarios]="usuarios"></lista-Usuarios>
   <h2>{{hero.name}} details!</h2>
   <div><label>id: </label>{{hero.id}}</div>
   <div>
     <label>name: </label>
     <input [(ngModel)]="hero.name" placeholder="name">
   </div>
-  `
+  `,
+  directives: [ListaUsuariosComponent]
 })
 export class AppComponent {
   usuarios: Usuario[] = 
