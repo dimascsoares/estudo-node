@@ -10,11 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var usuario_1 = require('../../models/usuario');
+var listaUsuariosService_1 = require('./listaUsuariosService');
 var ItemUsuarioComponent = (function () {
-    function ItemUsuarioComponent() {
+    function ItemUsuarioComponent(service) {
+        var _this = this;
+        this.service = service;
+        this.cssClass = "list-group-item";
+        this.onLimparSelecao = service.limparSelecao$.subscribe(function (x) { return _this.limparSelecao(); });
     }
     ItemUsuarioComponent.prototype.obterStringEmpresas = function (usuario) {
         return usuario.Empresas.map(function (e) { return e.Nome; }).join(', ');
+    };
+    ItemUsuarioComponent.prototype.selecionarUsuario = function (usuario) {
+        this.service.usuarioSelecionado(usuario);
+        this.cssClass = "list-group-item active";
+    };
+    ItemUsuarioComponent.prototype.limparSelecao = function () {
+        this.cssClass = "list-group-item";
+    };
+    ItemUsuarioComponent.prototype.ngOnDestroy = function () {
+        // prevent memory leak when component destroyed
+        this.onLimparSelecao.unsubscribe();
     };
     __decorate([
         core_1.Input(), 
@@ -23,9 +39,9 @@ var ItemUsuarioComponent = (function () {
     ItemUsuarioComponent = __decorate([
         core_1.Component({
             selector: 'item-Usuario',
-            template: "\n    <input type=\"hidden\" id=\"hidden{{usuario.Id}}\" />\n    <a id=\"{{usuario.Id}}\" href=\"#\" class=\"list-group-item\">\n    <h4 class=\"list-group-item-heading\">{{usuario.Nome + \" \" + usuario.Sobrenome}}</h4>\n    <p>\n        <b>E-mail:</b> {{usuario.Email}}<br />\n        <b>Empresas:</b> {{obterStringEmpresas(usuario)}}\n    </p>\n    </a>\n  "
+            template: "\n    <input type=\"hidden\" id=\"hidden{{usuario.Id}}\" />\n    <a id=\"{{usuario.Id}}\" href=\"#\" class=\"{{cssClass}}\" (click)=\"selecionarUsuario(usuario)\">\n    <h4 class=\"list-group-item-heading\">{{usuario.Nome + \" \" + usuario.Sobrenome}}</h4>\n    <p>\n        <b>E-mail:</b> {{usuario.Email}}<br />\n        <b>Empresas:</b> {{obterStringEmpresas(usuario)}}\n    </p>\n    </a>\n  "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [listaUsuariosService_1.ListaUsuariosService])
     ], ItemUsuarioComponent);
     return ItemUsuarioComponent;
 }());

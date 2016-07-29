@@ -9,9 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var listaUsuariosService_1 = require('./listaUsuariosService');
 var itemUsuario_component_1 = require('./itemUsuario.component');
 var ListaUsuariosComponent = (function () {
-    function ListaUsuariosComponent() {
+    function ListaUsuariosComponent(service) {
+        this.service = service;
+        service.usuarioSelecionado$.subscribe(function (usuario) { return service.limparSelecao(); });
     }
     __decorate([
         core_1.Input(), 
@@ -21,9 +24,10 @@ var ListaUsuariosComponent = (function () {
         core_1.Component({
             selector: 'lista-Usuarios',
             template: "\n  <div class=\"list-group\">\n    <item-Usuario *ngFor=\"let usuario of usuarios\" [usuario]=\"usuario\"></item-Usuario>\n  </div>\n  ",
-            directives: [itemUsuario_component_1.ItemUsuarioComponent]
+            directives: [itemUsuario_component_1.ItemUsuarioComponent],
+            providers: [listaUsuariosService_1.ListaUsuariosService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [listaUsuariosService_1.ListaUsuariosService])
     ], ListaUsuariosComponent);
     return ListaUsuariosComponent;
 }());
