@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Usuario } from './models/usuario';
+import { ClasseItem } from './components/listaUsuarios/classeItem';
 import { ListaUsuariosService } from './components/listaUsuarios/listaUsuariosService';
 import { ListaUsuariosComponent } from './components/listaUsuarios/listaUsuarios.component';
 
@@ -17,7 +18,7 @@ export class Hero {
   <div><label>ID: </label>{{usuarioSelecionado.Id}}</div>
   <div>
     <label>Nome: </label>
-    <input [(ngModel)]="usuarioSelecionado.Nome" placeholder="Nome">
+    <input [(ngModel)]="usuarioSelecionado.Nome" placeholder="Nome" (keyup)="validarUsuario()" required>
   </div>
   `,
   directives: [ListaUsuariosComponent],
@@ -25,11 +26,19 @@ export class Hero {
 })
 export class AppComponent {
 
+  title = "Tour of Heroes";
   usuarioSelecionado: Usuario;
 
   constructor(private service: ListaUsuariosService){
     this.usuarioSelecionado = new Usuario();
     service.usuarioSelecionado$.subscribe(usuario => this.usuarioSelecionado = usuario);
+  }
+
+  validarUsuario(){
+    if (!this.usuarioSelecionado.Nome.trim())
+      this.service.configurarErro(this.usuarioSelecionado);
+    else
+      this.service.removerErro({ usuario: this.usuarioSelecionado, classeItem: ClasseItem.selecionado })
   }
 
   usuarios: Usuario[] = 
@@ -70,10 +79,4 @@ export class AppComponent {
         [{Nome:"Tesla"}, {Nome:"Space X"}]
     )
   ];
-
-  title = "Tour of Heroes";
-  hero: Hero = {
-    id: 1,
-    name: "Windstorm"
-  };
 }

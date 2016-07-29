@@ -13,8 +13,12 @@ var Subject_1 = require('rxjs/Subject');
 var ListaUsuariosService = (function () {
     function ListaUsuariosService() {
         this.usuarioSelecionadoSource = new Subject_1.Subject();
+        this.removerErroSource = new Subject_1.Subject();
+        this.configurarErroSource = new Subject_1.Subject();
         this.limparSelecaoSource = new Subject_1.Subject();
         this.usuarioSelecionado$ = this.usuarioSelecionadoSource.asObservable();
+        this.removerErro$ = this.removerErroSource.asObservable();
+        this.configurarErro$ = this.configurarErroSource.asObservable();
         this.limparSelecao$ = this.limparSelecaoSource.asObservable();
     }
     ListaUsuariosService.prototype.usuarioSelecionado = function (usuario) {
@@ -22,6 +26,12 @@ var ListaUsuariosService = (function () {
     };
     ListaUsuariosService.prototype.limparSelecao = function () {
         this.limparSelecaoSource.next(null);
+    };
+    ListaUsuariosService.prototype.configurarErro = function (usuario) {
+        this.configurarErroSource.next(usuario);
+    };
+    ListaUsuariosService.prototype.removerErro = function (configuracao) {
+        this.removerErroSource.next(configuracao);
     };
     ListaUsuariosService = __decorate([
         core_1.Injectable(), 

@@ -1,0 +1,6 @@
+.itemComErro {
+    background-color: rgb(255, 235, 207) !important;
+    border-color: rgb(169, 68, 66) !important;
+    border-left: 7px solid rgb(169, 68, 66);
+    color: #555 !important;
+}
