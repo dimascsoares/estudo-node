@@ -24,8 +24,7 @@ var ListaUsuariosComponent = (function () {
         core_1.Component({
             selector: 'lista-Usuarios',
             template: "\n  <div class=\"list-group\">\n    <item-Usuario *ngFor=\"let usuario of usuarios\" [usuario]=\"usuario\"></item-Usuario>\n  </div>\n  ",
-            directives: [itemUsuario_component_1.ItemUsuarioComponent],
-            providers: [listaUsuariosService_1.ListaUsuariosService]
+            directives: [itemUsuario_component_1.ItemUsuarioComponent]
         }), 
         __metadata('design:paramtypes', [listaUsuariosService_1.ListaUsuariosService])
     ], ListaUsuariosComponent);

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Usuario } from './models/usuario';
+import { ListaUsuariosService } from './components/listaUsuarios/listaUsuariosService';
 import { ListaUsuariosComponent } from './components/listaUsuarios/listaUsuarios.component';
 
 export class Hero {
@@ -12,16 +13,25 @@ export class Hero {
   template:`
   <h1>{{title}}</h1>
   <lista-Usuarios [usuarios]="usuarios"></lista-Usuarios>
-  <h2>{{hero.name}} details!</h2>
-  <div><label>id: </label>{{hero.id}}</div>
+  <h2>{{usuarioSelecionado.Nome}} details!</h2>
+  <div><label>ID: </label>{{usuarioSelecionado.Id}}</div>
   <div>
-    <label>name: </label>
-    <input [(ngModel)]="hero.name" placeholder="name">
+    <label>Nome: </label>
+    <input [(ngModel)]="usuarioSelecionado.Nome" placeholder="Nome">
   </div>
   `,
-  directives: [ListaUsuariosComponent]
+  directives: [ListaUsuariosComponent],
+  providers: [ListaUsuariosService]
 })
 export class AppComponent {
+
+  usuarioSelecionado: Usuario;
+
+  constructor(private service: ListaUsuariosService){
+    this.usuarioSelecionado = new Usuario();
+    service.usuarioSelecionado$.subscribe(usuario => this.usuarioSelecionado = usuario);
+  }
+
   usuarios: Usuario[] = 
   [
     new Usuario (

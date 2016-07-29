@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var usuario_1 = require('./models/usuario');
+var listaUsuariosService_1 = require('./components/listaUsuarios/listaUsuariosService');
 var listaUsuarios_component_1 = require('./components/listaUsuarios/listaUsuarios.component');
 var Hero = (function () {
     function Hero() {
@@ -18,7 +19,9 @@ var Hero = (function () {
 }());
 exports.Hero = Hero;
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(service) {
+        var _this = this;
+        this.service = service;
         this.usuarios = [
             new usuario_1.Usuario("7bf3e72c-e2bb-4cc4-8da5-dd235ae9032c", "Bill", "Gates", "bill@microsoft.com", [{ Nome: "Microsoft" }]),
             new usuario_1.Usuario("fde0dcc4-49dc-4340-a6fb-8da98c07479b", "Steve", "jobs", "jobs@apple.com", [{ Nome: "Apple" }, { Nome: "Beats by Dre" }]),
@@ -31,14 +34,17 @@ var AppComponent = (function () {
             id: 1,
             name: "Windstorm"
         };
+        this.usuarioSelecionado = new usuario_1.Usuario();
+        service.usuarioSelecionado$.subscribe(function (usuario) { return _this.usuarioSelecionado = usuario; });
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n  <h1>{{title}}</h1>\n  <lista-Usuarios [usuarios]=\"usuarios\"></lista-Usuarios>\n  <h2>{{hero.name}} details!</h2>\n  <div><label>id: </label>{{hero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"hero.name\" placeholder=\"name\">\n  </div>\n  ",
-            directives: [listaUsuarios_component_1.ListaUsuariosComponent]
+            template: "\n  <h1>{{title}}</h1>\n  <lista-Usuarios [usuarios]=\"usuarios\"></lista-Usuarios>\n  <h2>{{usuarioSelecionado.Nome}} details!</h2>\n  <div><label>ID: </label>{{usuarioSelecionado.Id}}</div>\n  <div>\n    <label>Nome: </label>\n    <input [(ngModel)]=\"usuarioSelecionado.Nome\" placeholder=\"Nome\">\n  </div>\n  ",
+            directives: [listaUsuarios_component_1.ListaUsuariosComponent],
+            providers: [listaUsuariosService_1.ListaUsuariosService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [listaUsuariosService_1.ListaUsuariosService])
     ], AppComponent);
     return AppComponent;
 }());

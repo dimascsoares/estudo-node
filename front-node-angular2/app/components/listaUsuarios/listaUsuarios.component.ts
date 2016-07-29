@@ -10,8 +10,7 @@ import { ItemUsuarioComponent } from './itemUsuario.component';
     <item-Usuario *ngFor="let usuario of usuarios" [usuario]="usuario"></item-Usuario>
   </div>
   `,
-  directives: [ItemUsuarioComponent],
-  providers: [ListaUsuariosService]
+  directives: [ItemUsuarioComponent]
 })
 export class ListaUsuariosComponent {
     @Input() usuarios: Usuario[];
