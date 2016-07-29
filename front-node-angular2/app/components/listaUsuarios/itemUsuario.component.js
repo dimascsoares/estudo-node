@@ -61,8 +61,8 @@ var ItemUsuarioComponent = (function () {
     ItemUsuarioComponent = __decorate([
         core_1.Component({
             selector: 'item-Usuario',
+            templateUrl: 'app/components/listaUsuarios/itemUsuario.component.html',
             styleUrls: ['app/components/listaUsuarios/itemUsuario.component.css'],
-            template: "\n    <a id=\"{{usuario.Id}}\" href=\"#\" class=\"{{classeItem.toString()}}\" (click)=\"selecionarUsuario(usuario)\">\n    <h4 class=\"list-group-item-heading\">{{usuario.Nome + \" \" + usuario.Sobrenome}}</h4>\n    <p>\n        <b>E-mail:</b> {{usuario.Email}}<br />\n        <b>Empresas:</b> {{obterStringEmpresas(usuario)}}\n    </p>\n    </a>\n  "
         }), 
         __metadata('design:paramtypes', [listaUsuariosService_1.ListaUsuariosService])
     ], ItemUsuarioComponent);

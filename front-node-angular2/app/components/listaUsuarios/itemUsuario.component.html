@@ -1,0 +1,7 @@
+<a id="{{usuario.Id}}" href="#" class="{{classeItem.toString()}}" (click)="selecionarUsuario(usuario)">
+    <h4 class="list-group-item-heading">{{usuario.Nome + " " + usuario.Sobrenome}}</h4>
+    <p>
+        <b>E-mail:</b> {{usuario.Email}}<br />
+        <b>Empresas:</b> {{obterStringEmpresas(usuario)}}
+    </p>
+</a>

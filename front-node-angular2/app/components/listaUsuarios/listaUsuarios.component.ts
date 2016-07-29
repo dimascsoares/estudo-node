@@ -5,11 +5,7 @@ import { ItemUsuarioComponent } from './itemUsuario.component';
 
 @Component({
   selector: 'lista-Usuarios',
-  template:`
-  <div class="list-group">
-    <item-Usuario *ngFor="let usuario of usuarios" [usuario]="usuario"></item-Usuario>
-  </div>
-  `,
+  templateUrl: 'app/components/listaUsuarios/listaUsuarios.component.html',
   directives: [ItemUsuarioComponent]
 })
 export class ListaUsuariosComponent {

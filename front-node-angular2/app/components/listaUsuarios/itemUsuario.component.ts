@@ -7,16 +7,8 @@ import { ListaUsuariosService } from './listaUsuariosService';
 
 @Component({
   selector: 'item-Usuario',
+  templateUrl: 'app/components/listaUsuarios/itemUsuario.component.html',
   styleUrls: ['app/components/listaUsuarios/itemUsuario.component.css'],
-  template:`
-    <a id="{{usuario.Id}}" href="#" class="{{classeItem.toString()}}" (click)="selecionarUsuario(usuario)">
-    <h4 class="list-group-item-heading">{{usuario.Nome + " " + usuario.Sobrenome}}</h4>
-    <p>
-        <b>E-mail:</b> {{usuario.Email}}<br />
-        <b>Empresas:</b> {{obterStringEmpresas(usuario)}}
-    </p>
-    </a>
-  `
 })
 export class ItemUsuarioComponent implements OnDestroy {
     @Input() usuario: Usuario;

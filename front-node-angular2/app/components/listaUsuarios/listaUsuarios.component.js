@@ -23,7 +23,7 @@ var ListaUsuariosComponent = (function () {
     ListaUsuariosComponent = __decorate([
         core_1.Component({
             selector: 'lista-Usuarios',
-            template: "\n  <div class=\"list-group\">\n    <item-Usuario *ngFor=\"let usuario of usuarios\" [usuario]=\"usuario\"></item-Usuario>\n  </div>\n  ",
+            templateUrl: 'app/components/listaUsuarios/listaUsuarios.component.html',
             directives: [itemUsuario_component_1.ItemUsuarioComponent]
         }), 
         __metadata('design:paramtypes', [listaUsuariosService_1.ListaUsuariosService])
