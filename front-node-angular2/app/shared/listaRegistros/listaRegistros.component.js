@@ -9,26 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var listaUsuariosService_1 = require('./listaUsuariosService');
-var itemUsuario_component_1 = require('./itemUsuario.component');
-var ListaUsuariosComponent = (function () {
-    function ListaUsuariosComponent(service) {
+var listaRegistrosService_1 = require('./listaRegistrosService');
+var itemLista_component_1 = require('./itemLista.component');
+var ListaRegistrosComponent = (function () {
+    function ListaRegistrosComponent(service) {
         this.service = service;
-        service.usuarioSelecionado$.subscribe(function (usuario) { return service.limparSelecao(); });
+        service.itemSelecionado$.subscribe(function (item) { return service.limparSelecao(); });
     }
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
-    ], ListaUsuariosComponent.prototype, "usuarios", void 0);
-    ListaUsuariosComponent = __decorate([
+    ], ListaRegistrosComponent.prototype, "registros", void 0);
+    ListaRegistrosComponent = __decorate([
         core_1.Component({
-            selector: 'lista-Usuarios',
-            templateUrl: 'app/components/listaUsuarios/listaUsuarios.component.html',
-            directives: [itemUsuario_component_1.ItemUsuarioComponent]
+            selector: 'lista-Registros',
+            templateUrl: 'app/shared/listaRegistros/listaRegistros.component.html',
+            directives: [itemLista_component_1.ItemListaComponent]
         }), 
-        __metadata('design:paramtypes', [listaUsuariosService_1.ListaUsuariosService])
-    ], ListaUsuariosComponent);
-    return ListaUsuariosComponent;
+        __metadata('design:paramtypes', [listaRegistrosService_1.ListaRegistrosService])
+    ], ListaRegistrosComponent);
+    return ListaRegistrosComponent;
 }());
-exports.ListaUsuariosComponent = ListaUsuariosComponent;
-//# sourceMappingURL=listaUsuarios.component.js.map
+exports.ListaRegistrosComponent = ListaRegistrosComponent;
+//# sourceMappingURL=listaRegistros.component.js.map

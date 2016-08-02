@@ -9,11 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var usuario_1 = require('../../models/usuario');
 var classeItem_1 = require('./classeItem');
-var listaUsuariosService_1 = require('./listaUsuariosService');
-var ItemUsuarioComponent = (function () {
-    function ItemUsuarioComponent(service) {
+var mapToIterable_1 = require('./mapToIterable');
+var listaRegistrosService_1 = require('./listaRegistrosService');
+var ItemListaComponent = (function () {
+    function ItemListaComponent(service) {
         var _this = this;
         this.service = service;
         this.contemErros = false;
@@ -22,33 +22,30 @@ var ItemUsuarioComponent = (function () {
         this.onConfigurarErro = service.configurarErro$.subscribe(function (usuario) { return _this.configurarErro(usuario); });
         this.onRemoverErro = service.removerErro$.subscribe(function (config) { return _this.removerErro(config); });
     }
-    ItemUsuarioComponent.prototype.obterStringEmpresas = function (usuario) {
-        return usuario.Empresas.map(function (e) { return e.Nome; }).join(', ');
-    };
-    ItemUsuarioComponent.prototype.selecionarUsuario = function (usuario) {
-        this.service.usuarioSelecionado(usuario);
+    ItemListaComponent.prototype.selecionarItem = function (item) {
+        this.service.itemSelecionado(item);
         this.configuraClasseItem(classeItem_1.ClasseItem.selecionado);
     };
-    ItemUsuarioComponent.prototype.limparSelecao = function () {
+    ItemListaComponent.prototype.limparSelecao = function () {
         this.configuraClasseItem(classeItem_1.ClasseItem.normal);
     };
-    ItemUsuarioComponent.prototype.configurarErro = function (usuario) {
-        if (this.usuario.Id == usuario.Id) {
+    ItemListaComponent.prototype.configurarErro = function (item) {
+        if (this.item == item) {
             this.contemErros = true;
             this.classeItem = classeItem_1.ClasseItem.erro;
         }
     };
-    ItemUsuarioComponent.prototype.removerErro = function (configuracao) {
-        if (this.usuario.Id == configuracao.usuario.Id) {
+    ItemListaComponent.prototype.removerErro = function (configuracao) {
+        if (this.item == configuracao.item) {
             this.contemErros = false;
             this.classeItem = configuracao.classeItem;
         }
     };
-    ItemUsuarioComponent.prototype.configuraClasseItem = function (classe) {
+    ItemListaComponent.prototype.configuraClasseItem = function (classe) {
         if (!this.contemErros)
             this.classeItem = classe;
     };
-    ItemUsuarioComponent.prototype.ngOnDestroy = function () {
+    ItemListaComponent.prototype.ngOnDestroy = function () {
         // prevent memory leak when component destroyed
         this.onLimparSelecao.unsubscribe();
         this.onConfigurarErro.unsubscribe();
@@ -56,17 +53,18 @@ var ItemUsuarioComponent = (function () {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', usuario_1.Usuario)
-    ], ItemUsuarioComponent.prototype, "usuario", void 0);
-    ItemUsuarioComponent = __decorate([
+        __metadata('design:type', Object)
+    ], ItemListaComponent.prototype, "item", void 0);
+    ItemListaComponent = __decorate([
         core_1.Component({
-            selector: 'item-Usuario',
-            templateUrl: 'app/components/listaUsuarios/itemUsuario.component.html',
-            styleUrls: ['app/components/listaUsuarios/itemUsuario.component.css'],
+            selector: 'item-Lista',
+            templateUrl: 'app/shared/listaRegistros/itemLista.component.html',
+            styleUrls: ['app/shared/listaRegistros/itemLista.component.css'],
+            pipes: [mapToIterable_1.MapToIterable]
         }), 
-        __metadata('design:paramtypes', [listaUsuariosService_1.ListaUsuariosService])
-    ], ItemUsuarioComponent);
-    return ItemUsuarioComponent;
+        __metadata('design:paramtypes', [listaRegistrosService_1.ListaRegistrosService])
+    ], ItemListaComponent);
+    return ItemListaComponent;
 }());
-exports.ItemUsuarioComponent = ItemUsuarioComponent;
-//# sourceMappingURL=itemUsuario.component.js.map
+exports.ItemListaComponent = ItemListaComponent;
+//# sourceMappingURL=itemLista.component.js.map

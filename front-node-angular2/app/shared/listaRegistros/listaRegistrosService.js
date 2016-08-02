@@ -10,34 +10,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
-var ListaUsuariosService = (function () {
-    function ListaUsuariosService() {
-        this.usuarioSelecionadoSource = new Subject_1.Subject();
+var ListaRegistrosService = (function () {
+    function ListaRegistrosService() {
+        this.itemSelecionadoSource = new Subject_1.Subject();
         this.removerErroSource = new Subject_1.Subject();
         this.configurarErroSource = new Subject_1.Subject();
         this.limparSelecaoSource = new Subject_1.Subject();
-        this.usuarioSelecionado$ = this.usuarioSelecionadoSource.asObservable();
+        this.itemSelecionado$ = this.itemSelecionadoSource.asObservable();
         this.removerErro$ = this.removerErroSource.asObservable();
         this.configurarErro$ = this.configurarErroSource.asObservable();
         this.limparSelecao$ = this.limparSelecaoSource.asObservable();
     }
-    ListaUsuariosService.prototype.usuarioSelecionado = function (usuario) {
-        this.usuarioSelecionadoSource.next(usuario);
+    ListaRegistrosService.prototype.itemSelecionado = function (item) {
+        this.itemSelecionadoSource.next(item);
     };
-    ListaUsuariosService.prototype.limparSelecao = function () {
+    ListaRegistrosService.prototype.limparSelecao = function () {
         this.limparSelecaoSource.next(null);
     };
-    ListaUsuariosService.prototype.configurarErro = function (usuario) {
-        this.configurarErroSource.next(usuario);
+    ListaRegistrosService.prototype.configurarErro = function (item) {
+        this.configurarErroSource.next(item);
     };
-    ListaUsuariosService.prototype.removerErro = function (configuracao) {
+    ListaRegistrosService.prototype.removerErro = function (configuracao) {
         this.removerErroSource.next(configuracao);
     };
-    ListaUsuariosService = __decorate([
+    ListaRegistrosService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], ListaUsuariosService);
-    return ListaUsuariosService;
+    ], ListaRegistrosService);
+    return ListaRegistrosService;
 }());
-exports.ListaUsuariosService = ListaUsuariosService;
-//# sourceMappingURL=listaUsuariosService.js.map
+exports.ListaRegistrosService = ListaRegistrosService;
+//# sourceMappingURL=listaRegistrosService.js.map

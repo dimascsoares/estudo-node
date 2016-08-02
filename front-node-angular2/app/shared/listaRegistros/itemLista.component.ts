@@ -1,36 +1,33 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { Subscription }   from 'rxjs/Subscription';
-import { Usuario } from '../../models/usuario';
+import { ItemLista } from './itemLista';
 import { ClasseItem } from './classeItem';
 import { ConfiguracaoItem } from './configuracaoItem';
-import { ListaUsuariosService } from './listaUsuariosService';
+import { MapToIterable } from './mapToIterable';
+import { ListaRegistrosService } from './listaRegistrosService';
 
 @Component({
-  selector: 'item-Usuario',
-  templateUrl: 'app/components/listaUsuarios/itemUsuario.component.html',
-  styleUrls: ['app/components/listaUsuarios/itemUsuario.component.css'],
+  selector: 'item-Lista',
+  templateUrl: 'app/shared/listaRegistros/itemLista.component.html',
+  styleUrls: ['app/shared/listaRegistros/itemLista.component.css'],
+  pipes: [MapToIterable]
 })
-export class ItemUsuarioComponent implements OnDestroy {
-    @Input() usuario: Usuario;
+export class ItemListaComponent implements OnDestroy {
+    @Input() item: ItemLista;
     onLimparSelecao: Subscription;
     onConfigurarErro: Subscription;
     onRemoverErro: Subscription;
-    onValidarUsuario: Subscription;
     contemErros: boolean = false;
     classeItem: ClasseItem = ClasseItem.normal;
 
-    constructor(private service: ListaUsuariosService){
+    constructor(private service: ListaRegistrosService){
         this.onLimparSelecao = service.limparSelecao$.subscribe(x => this.limparSelecao());
         this.onConfigurarErro = service.configurarErro$.subscribe(usuario => this.configurarErro(usuario));
         this.onRemoverErro = service.removerErro$.subscribe(config => this.removerErro(config));
     }
 
-    obterStringEmpresas(usuario:Usuario) {
-        return usuario.Empresas.map(function(e){return e.Nome;}).join(', ');
-    }
-
-    selecionarUsuario(usuario:Usuario){
-        this.service.usuarioSelecionado(usuario);
+    selecionarItem(item:ItemLista){
+        this.service.itemSelecionado(item);
         this.configuraClasseItem(ClasseItem.selecionado);
     }
 
@@ -38,15 +35,15 @@ export class ItemUsuarioComponent implements OnDestroy {
         this.configuraClasseItem(ClasseItem.normal);
     }
 
-    configurarErro(usuario: Usuario){
-        if (this.usuario.Id == usuario.Id) {
+    configurarErro(item:ItemLista){
+        if (this.item == item) {
             this.contemErros = true;
             this.classeItem = ClasseItem.erro;
         }
     }
 
     removerErro(configuracao: ConfiguracaoItem){
-        if (this.usuario.Id == configuracao.usuario.Id) {
+        if (this.item == configuracao.item) {
             this.contemErros = false;
             this.classeItem = configuracao.classeItem;
         }

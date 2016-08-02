@@ -1,0 +1,46 @@
+.box {
+    font-family: Tahoma;
+    padding: 5px;
+    width: unset;
+}
+.box-float {
+    border-radius: 4px;
+}
+.box-topDown {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-top: 0px;
+}
+.box-downTop {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-orientation: sideways;
+    margin-bottom: 0px;
+}
+.box-leftRight {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    text-orientation: sideways;
+    margin-left: 0px;
+}
+.box-rightLeft {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    margin-right: 0px;
+}
+.verde {
+    color: #f9f9f9;
+    background-color: #00af00;
+}
+.amarelo {
+    color: #888888;
+    background-color: #ffff7a;
+}
+.vermelho {
+    color: #fbfbfb;
+    background-color: #f33d3d;
+}
+.cinza {
+    color: dimgray;
+    background-color: #d4d4d4;
+}

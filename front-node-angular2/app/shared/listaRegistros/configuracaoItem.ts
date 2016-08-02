@@ -1,7 +1,7 @@
-import { Usuario } from '../../models/usuario';
 import { ClasseItem } from './classeItem';
+import { ItemLista } from './itemLista';
 
 export class ConfiguracaoItem {
-    public usuario: Usuario;
+    public item: ItemLista;
     public classeItem : ClasseItem;
 }

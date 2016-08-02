@@ -1,0 +1,8 @@
+<a href="#" class="{{classeItem.toString()}}" (click)="selecionarItem(item)">
+    <h4 class="list-group-item-heading">{{item.valorPrincipal}}</h4>
+    <span>
+        <div *ngFor="let valor of item.demaisValores | mapToIterable">
+            <b>{{valor.key}}:</b> {{valor.value}}<br *ngIf="!$last" />
+        </div>
+    </span>
+</a>
