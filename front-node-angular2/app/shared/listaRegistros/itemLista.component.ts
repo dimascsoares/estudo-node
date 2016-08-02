@@ -22,7 +22,7 @@ export class ItemListaComponent implements OnDestroy {
 
     constructor(private service: ListaRegistrosService){
         this.onLimparSelecao = service.limparSelecao$.subscribe(x => this.limparSelecao());
-        this.onConfigurarErro = service.configurarErro$.subscribe(usuario => this.configurarErro(usuario));
+        this.onConfigurarErro = service.configurarErro$.subscribe(item => this.configurarErro(item));
         this.onRemoverErro = service.removerErro$.subscribe(config => this.removerErro(config));
     }
 

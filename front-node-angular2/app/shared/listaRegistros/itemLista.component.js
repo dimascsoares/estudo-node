@@ -19,7 +19,7 @@ var ItemListaComponent = (function () {
         this.contemErros = false;
         this.classeItem = classeItem_1.ClasseItem.normal;
         this.onLimparSelecao = service.limparSelecao$.subscribe(function (x) { return _this.limparSelecao(); });
-        this.onConfigurarErro = service.configurarErro$.subscribe(function (usuario) { return _this.configurarErro(usuario); });
+        this.onConfigurarErro = service.configurarErro$.subscribe(function (item) { return _this.configurarErro(item); });
         this.onRemoverErro = service.removerErro$.subscribe(function (config) { return _this.removerErro(config); });
     }
     ItemListaComponent.prototype.selecionarItem = function (item) {
