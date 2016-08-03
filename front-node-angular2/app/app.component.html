@@ -1,0 +1,27 @@
+<div class="page-header" style="margin-top:0px">
+    <h3 style="margin-bottom:0px"><img src="/assets/img/users.png" />{{title}}</h3>
+</div>
+<div class="col-md-6">
+    <lista-Registros [registros]="registros"></lista-Registros>
+</div>
+<div class="col-md-6">
+    <div class="page-header" style="margin-top:0px; margin-bottom:25px">
+        <h3 style="margin-bottom:0px">Dados do usuário</h3>
+    </div>
+    <div class="form-group" style="margin-bottom: 25px">
+        <label for="txtNome">Nome:</label>
+        <input id="txtNome" [(ngModel)]="usuarioSelecionado.Nome" placeholder="Nome" (keyup)="validarUsuario()" class="form-control" required>
+    </div>
+    <div class="form-group" style="margin-bottom: 25px">
+        <label for="txtSobrenome">Sobrenome:</label>
+        <input id="txtSobrenome" [(ngModel)]="usuarioSelecionado.Sobrenome" placeholder="Sobrenome" (keyup)="validarUsuario()" class="form-control" required>
+    </div>
+    <div class="form-group" style="margin-bottom: 25px">
+        <label for="txtEmail">E-mail:</label>
+        <input id="txtEmail" [(ngModel)]="usuarioSelecionado.Email" placeholder="E-mail" (keyup)="validarUsuario()" class="form-control" required>
+    </div>
+    <div class="form-group" style="margin-bottom: 25px">
+        <label for="txtTelefone">Telefone:</label>
+        <input id="txtTelefone" [(ngModel)]="usuarioSelecionado.Telefone" placeholder="Telefone" (keyup)="validarUsuario()" class="form-control" required>
+    </div>
+</div>

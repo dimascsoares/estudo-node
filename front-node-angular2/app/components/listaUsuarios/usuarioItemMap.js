@@ -21,12 +21,15 @@ var UsuarioItemLista = (function (_super) {
         get: function () {
             var valores = {};
             valores["E-mail"] = this.Email;
-            valores["Empresas"] = "TESTE";
+            valores["Empresas"] = this.obterStringEmpresas();
             return valores;
         },
         enumerable: true,
         configurable: true
     });
+    UsuarioItemLista.prototype.obterStringEmpresas = function () {
+        return this.Empresas.map(function (e) { return e.Nome; }).join(', ');
+    };
     return UsuarioItemLista;
 }(usuario_1.Usuario));
 exports.UsuarioItemLista = UsuarioItemLista;

@@ -11,22 +11,13 @@ export class Hero {
 
 @Component({
   selector: 'my-app',
-  template:`
-  <h1>{{title}}</h1>
-  <lista-Registros [registros]="registros"></lista-Registros>
-  <h2>{{usuarioSelecionado.Nome}} details!</h2>
-  <div><label>ID: </label>{{usuarioSelecionado.Id}}</div>
-  <div>
-    <label>Nome: </label>
-    <input [(ngModel)]="usuarioSelecionado.Nome" placeholder="Nome" (keyup)="validarUsuario()" required>
-  </div>
-  `,
+  templateUrl: 'app/app.component.html',
   directives: [ListaRegistrosComponent],
   providers: [ListaRegistrosService]
 })
 export class AppComponent {
 
-  title = "Tour of Heroes";
+  title = "Gerenciamento de Usuários";
   usuarioSelecionado: UsuarioItemLista;
 
   constructor(private service: ListaRegistrosService){

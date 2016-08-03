@@ -9,6 +9,7 @@ var ClasseItem = (function () {
     ClasseItem.normal = new ClasseItem("list-group-item");
     ClasseItem.selecionado = new ClasseItem("list-group-item active");
     ClasseItem.erro = new ClasseItem("list-group-item active itemComErro");
+    ClasseItem.erroSelecionado = new ClasseItem("list-group-item active itemComErroSelecionado");
     return ClasseItem;
 }());
 exports.ClasseItem = ClasseItem;

@@ -1,6 +1,13 @@
 .itemComErro {
     background-color: rgb(255, 235, 207) !important;
     border-color: rgb(169, 68, 66) !important;
-    border-left: 7px solid rgb(169, 68, 66);
+    border-left: 7px solid;
     color: #555 !important;
+}
+
+.itemComErroSelecionado {
+    background-color: rgb(224, 85, 82) !important;
+    border-color: rgb(148, 56, 54) !important;
+    border-left: 7px solid;
+    color: #fff !important;
 }

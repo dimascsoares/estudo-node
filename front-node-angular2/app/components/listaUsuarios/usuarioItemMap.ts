@@ -11,8 +11,12 @@ export class UsuarioItemLista extends Usuario implements ItemLista {
     public get demaisValores(){
         var valores: { [campo:string]:string } = {};
         valores["E-mail"] = this.Email;
-        valores["Empresas"] = "TESTE";
+        valores["Empresas"] = this.obterStringEmpresas();
         return valores;
+    }
+
+    obterStringEmpresas() {
+        return this.Empresas.map(function(e){return e.Nome;}).join(', ');
     }
 
     constructor(id?:string, nome?:string, sobrenome?:string, email?:string, empresas?:Empresa[]) { 

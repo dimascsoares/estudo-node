@@ -23,7 +23,7 @@ var AppComponent = (function () {
     function AppComponent(service) {
         var _this = this;
         this.service = service;
-        this.title = "Tour of Heroes";
+        this.title = "Gerenciamento de Usuários";
         this.registros = [
             new usuarioItemMap_1.UsuarioItemLista("7bf3e72c-e2bb-4cc4-8da5-dd235ae9032c", "Bill", "Gates", "bill@microsoft.com", [{ Nome: "Microsoft" }]),
             new usuarioItemMap_1.UsuarioItemLista("fde0dcc4-49dc-4340-a6fb-8da98c07479b", "Steve", "jobs", "jobs@apple.com", [{ Nome: "Apple" }, { Nome: "Beats by Dre" }]),
@@ -48,7 +48,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n  <h1>{{title}}</h1>\n  <lista-Registros [registros]=\"registros\"></lista-Registros>\n  <h2>{{usuarioSelecionado.Nome}} details!</h2>\n  <div><label>ID: </label>{{usuarioSelecionado.Id}}</div>\n  <div>\n    <label>Nome: </label>\n    <input [(ngModel)]=\"usuarioSelecionado.Nome\" placeholder=\"Nome\" (keyup)=\"validarUsuario()\" required>\n  </div>\n  ",
+            templateUrl: 'app/app.component.html',
             directives: [listaRegistros_component_1.ListaRegistrosComponent],
             providers: [listaRegistrosService_1.ListaRegistrosService]
         }), 
